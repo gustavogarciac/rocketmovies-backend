@@ -4,8 +4,12 @@ const moviesRoutes = Router();
 const MoviesController = require("../controllers/MoviesController");
 const moviesController = new MoviesController();
 
-moviesRoutes.post("/:user_id", moviesController.create);
-moviesRoutes.put("/:user_id/:id", moviesController.update);
+const ensureAuthenticated = require("../middlewares/ensureAuthenticated");
+
+moviesRoutes.use(ensureAuthenticated);
+
+moviesRoutes.post("/", moviesController.create);
+moviesRoutes.put("/:id", moviesController.update);
 moviesRoutes.get("/:id", moviesController.show);
 moviesRoutes.get("/", moviesController.index);
 

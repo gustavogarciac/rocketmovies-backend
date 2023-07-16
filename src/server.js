@@ -1,4 +1,6 @@
 require("express-async-errors");
+require("dotenv").config();
+
 const express = require("express");
 const server = express();
 
@@ -24,7 +26,7 @@ server.use((error, request, response, next) => {
   });
 });
 
-const port = 3333;
+const port = process.env.PORT;
 server.listen(port, () =>
   console.log(`🚀 Servidor inicializado em http://localhost:${port}`)
 );
