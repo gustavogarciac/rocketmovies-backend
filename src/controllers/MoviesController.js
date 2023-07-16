@@ -68,7 +68,11 @@ class MoviesController {
       throw new AppError("Não foi possível encontrar o filme!", 404);
     }
 
-    return response.status(200).json(movie);
+    const movieTags = await knex("tags")
+      .where({ movie_id: id })
+      .orderBy("name");
+
+    return response.status(200).json({ ...movie, tags: movieTags });
   }
 
   async index(request, response) {
