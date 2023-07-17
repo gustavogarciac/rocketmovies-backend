@@ -98,6 +98,24 @@ class MoviesController {
 
     return response.status(200).json(moviesWithTags);
   }
+
+  async delete(request, response) {
+    try {
+      const { id } = request.params;
+      if (!id) {
+        throw new AppError("Não foi possível encontrar o ID do filme.", 400);
+      }
+      const movie = await knex("movies").where({ id }).first();
+
+      if (!movie) {
+        throw new AppError("Não foi possível encontrar este filme!");
+      }
+
+      await knex("movies").where({ id }).delete();
+    } catch (error) {
+      throw new AppError("Não foi possível deletar o filme.", 400);
+    }
+  }
 }
 
 module.exports = MoviesController;

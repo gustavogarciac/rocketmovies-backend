@@ -7,7 +7,9 @@ const server = express();
 const AppError = require("./utils/AppError");
 const routes = require("./routes");
 const uploadsConfig = require("./configs/upload");
+const cors = require("cors");
 
+server.use(cors());
 server.use(express.json());
 server.use("/files", express.static(uploadsConfig.UPLOADS_FOLDER));
 server.use(routes);

@@ -24,7 +24,7 @@ class DiskStorage {
     }
 
     /* This method below is actually responsible for deleting the file. */
-    await fs.promises.unlink(file);
+    await fs.promises.unlink(filePath);
   }
 }
 
